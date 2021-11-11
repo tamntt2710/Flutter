@@ -1,25 +1,18 @@
 import 'package:flutter/material.dart';
-import 'package:start_now/Calculator/Nums.dart';
+import 'package:provider/provider.dart';
 
+import '../list_button.dart';
 import 'SquareButton.dart';
-class Screen extends StatefulWidget {
-  const Screen({Key? key}) : super(key: key);
-
-  @override
-  _ScreenState createState() => _ScreenState();
-}
-
-class _ScreenState extends State<Screen> {
+class Screen extends StatelessWidget {
   String history = '';
   String result = '';
   void numClick(String text){
-    setState((){
 
-    });
   }
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size ;
+    list_button button = Provider.of(context);
     return Container(
       height: size.height *0.25 ,
       width: size.width,
@@ -32,7 +25,7 @@ class _ScreenState extends State<Screen> {
           Container(
             padding: EdgeInsets.only(right: 10,top: size.height * 0.05),
             child: Text(
-              history,
+              'a',
               style: TextStyle(
                 fontSize: 25,
                 color: Colors.white,

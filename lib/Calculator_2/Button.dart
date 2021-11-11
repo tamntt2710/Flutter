@@ -14,18 +14,21 @@ class ButtonNumber extends StatelessWidget {
       child: Container(
         margin: EdgeInsets.all(5),
         alignment: Alignment.center,
-        width: 87,
-        height: 87,
+        width: 70,
+        height: 70,
         decoration: BoxDecoration(
-            color: Colors.black38,
+            color : select % 4 == 3? Colors.yellow:Color(0xff35373B),
+            border: Border.all(color: Color(0xff4B4D51),width: 2),
             borderRadius:select % 4 == 3? BorderRadius.all(Radius.circular(90))
                 :BorderRadius.all(Radius.circular(10))
         ),
-        child: Text(
-          text,
-          style: TextStyle(
-              color: Colors.white,
-              fontSize: 30,
+        child: Center(
+          child: Text(
+            text,
+            style: TextStyle(
+              color : select % 4 == 3?Colors.black:Colors.white,
+                fontSize: 42,
+            ),
           ),
         ),
       ),

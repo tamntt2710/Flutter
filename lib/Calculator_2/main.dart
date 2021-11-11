@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'Button.dart';
+import 'list_Nums.dart';
 
 void main() => runApp(MyApp());
 
@@ -23,7 +24,7 @@ class _MyAppState extends State<MyApp> {
   void btnClick(String btnVal){
     print(btnVal);
     if(btnVal == 'C'){
-      textToDisplay='';
+      history='';
       firstNum = 0;
       secondNum = 0;
       res = '';
@@ -54,7 +55,7 @@ class _MyAppState extends State<MyApp> {
         history = firstNum.toString() + operation.toString() +secondNum
             .toString();
       }
-      if(operation == '/'){
+      if(operation == '/' || operation == '%'){
         res = (firstNum / secondNum).toString();
         history = firstNum.toString() + operation.toString() +secondNum
             .toString();
@@ -70,7 +71,9 @@ class _MyAppState extends State<MyApp> {
   Widget build(BuildContext context) {
     return MaterialApp(
       home: Scaffold(
+        backgroundColor: const Color.fromRGBO(25, 30, 35, 1),
         body: Container(
+          padding: EdgeInsets.only(left: 15,right: 15),
           child: Column(
             children: [
             Flexible(
@@ -78,7 +81,7 @@ class _MyAppState extends State<MyApp> {
               fit: FlexFit.tight,
               child: Container(
               decoration: BoxDecoration(
-                color: Colors.blueAccent,
+                color: Color.fromRGBO(53, 55, 59, 1),
               ),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.end,
@@ -110,7 +113,7 @@ class _MyAppState extends State<MyApp> {
                     padding: EdgeInsets.only(right: 10, top: 10),
                     child: Text(
                       textToDisplay,
-                      style: TextStyle(color: Colors.white, fontSize: 25),
+                      style: TextStyle(color: Colors.white, fontSize: 30),
                     ),
                   ),
                 ],
@@ -119,120 +122,57 @@ class _MyAppState extends State<MyApp> {
             ),
               Flexible(
                 flex: 5,
-                child: Container(
                   child: Column(
                     children: [
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          ButtonNumber(
-                            text: 'C',
-                            select: 0,
-                            click: btnClick,
-                          ),
-                          ButtonNumber(
-                            text: '\$',
-                            select: 1,
-                            click: btnClick,
-                          ),
-                          ButtonNumber(text: '%', select: 2, click: btnClick,),
-                          ButtonNumber(
-                            text: '/',
-                            select: 3,
-                            click: btnClick,
-                          ),
-                        ],
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          ButtonNumber(
-                            text: '7',
-                            select: 4,
-                            click: btnClick,
-                          ),
-                          ButtonNumber(
-                            text: '8',
-                            select: 5,
-                            click: btnClick,
-                          ),
-                          ButtonNumber(text: '9', select: 6, click: btnClick,),
-                          ButtonNumber(
-                            text: '-',
-                            select: 7,
-                            click: btnClick,
-                          ),
-                        ],
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          ButtonNumber(
-                            text: '4',
-                            select: 8,
-                            click: btnClick,
-                          ),
-                          ButtonNumber(
-                            text: '5',
-                            select: 9,
-                            click: btnClick,
-                          ),
-                          ButtonNumber(text: '6', select: 10, click: btnClick,),
-                          ButtonNumber(text: '+', select: 11, click: btnClick,),
-                        ],
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          ButtonNumber(
-                            text: '1',
-                            select: 12,
-                            click: btnClick,
-                          ),
-                          ButtonNumber(
-                            text: '2',
-                            select: 13,
-                            click: btnClick,
-                          ),
-                          ButtonNumber(text: '3', select: 14, click: btnClick,),
-                          ButtonNumber(text: '*', select: 15, click: btnClick,),
-                        ],
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Flexible(
-                            flex: 2,
-                            fit: FlexFit.tight,
-                            child: ButtonNumber(
-                              text: '0',
-                              select: 16,
-                              click: btnClick,
+                      Flexible(
+                        flex: 4,
+                        fit: FlexFit.tight,
+                        child: GridView.builder(
+                            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                                crossAxisCount: 4, crossAxisSpacing: 15,
+                                mainAxisSpacing: 7
                             ),
-                          ),
-                          Flexible(
-                            flex: 1,
-                            child: ButtonNumber(
-                              text: '.',
-                              select: 18,
-                              click: btnClick,
-                            ),
-                          ),
-                          Flexible(
-                            flex: 1,
-                            child: ButtonNumber(
-                              text: '=',
-                              select: 19,
-                              click: btnClick,
-                            ),
-                          ),
-                        ],
-                      )
+                            itemCount: 16,
+                            itemBuilder: (context,index){
+                              return  ButtonNumber(text: list_Nums
+                                  .listnums[index].value.toString(), select:
+                              index, click: btnClick,);
+                            }),
+                      ),
+                      Flexible(
+                          flex: 1,
+                          child : Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Flexible(
+                                  flex: 2,
+                                  fit: FlexFit.tight,
+                                  child: ButtonNumber(text: list_Nums
+                                      .listnums[16].value.toString(), select:
+                                  17,
+                            click: btnClick,)
+                              ),
+                              Flexible(
+                                  flex: 1,
+                                  child:ButtonNumber(text: list_Nums
+                                      .listnums[17].value.toString(), select:
+                                  18,
+                                click: btnClick,)
+                              ),
+                              Flexible(
+                                  flex: 1,
+                                  child: ButtonNumber(text: list_Nums
+                                      .listnums[18].value.toString(), select:
+                                  19,
+                                click: btnClick,)
+                              ),
+                            ],
+                          )
+                      ),
                     ],
                   ),
                 ),
-              )
             ],
           ),
         ),

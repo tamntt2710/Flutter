@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
-import '../Nums.dart';
-import 'Flex.dart';
+import '../list_button.dart';
 import 'SquareButton.dart';
-
+import 'package:provider/provider.dart';
 class ListNumber extends StatefulWidget {
   const ListNumber({Key? key}) : super(key: key);
 
@@ -11,10 +10,13 @@ class ListNumber extends StatefulWidget {
 }
 
 class _ListNumberState extends State<ListNumber> {
+
   @override
   Widget build(BuildContext context) {
-    void btnClick(String btnVal){
-      print(btnVal);
+    list_button buttonValue = Provider.of<list_button>(context);
+    void btnClick(int index){
+      print(buttonValue.listnums[index].value.toString());
+      buttonValue.listnums[index].value.toString();
     }
     return Container(
       child: Column(
@@ -29,16 +31,37 @@ class _ListNumberState extends State<ListNumber> {
               itemCount: 16,
               itemBuilder: (context,index){
                 return SquareButton(
-                  select: index,num: listnums[index],press : btnClick
-                //     (String value){
-                //   setState(() => listnums[index].value = value);
-                // }
+                  select: index,num: list_button().listnums[index],press : btnClick
                 );
               }),
           ),
           Flexible(
             flex: 1,
-            child : FlexRow()
+            child : Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Flexible(
+                    flex: 2,
+                    fit: FlexFit.tight,
+                    child: SquareButton(
+                        select: 17,num: list_button().listnums[16],press :btnClick
+                    )
+                ),
+                Flexible(
+                    flex: 1,
+                    child: SquareButton(
+                        select: 18,num: list_button().listnums[17],press : btnClick
+                    )
+                ),
+                Flexible(
+                    flex: 1,
+                    child: SquareButton(
+                        select: 19,num: list_button().listnums[18],press :btnClick
+                    )
+                ),
+              ],
+            )
           ),
         ],
       ),

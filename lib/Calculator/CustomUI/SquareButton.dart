@@ -1,19 +1,22 @@
 import 'package:flutter/material.dart';
-
+import 'package:provider/provider.dart';
 import '../Nums.dart';
+import '../list_button.dart';
 class SquareButton extends StatelessWidget {
   int select;
   Nums? num;
-  Function(String) press;
+  Function press;
   SquareButton({Key? key,required this.select,required  this.num,required this.press}) :
         super
       (key: key);
 
   @override
   Widget build(BuildContext context) {
+    list_button button = Provider.of(context);
     return InkWell(
       onTap: (){
-        press(num!.value as String) ;
+        button.show(select);
+        press(select);
       },
       child: Container(
         alignment: Alignment.center,
