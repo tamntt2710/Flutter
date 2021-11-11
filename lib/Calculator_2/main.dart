@@ -1,4 +1,4 @@
-
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'UI/keyboard.dart';
@@ -7,8 +7,11 @@ import 'Model/notifi.dart';
 void main() {
   runApp(ChangeNotifierProvider(
     create: (_)=>provider_model(),
-    child: MaterialApp(
-      home: MyApp(),
+    child: ScreenUtilInit(
+      designSize: Size(360, 690),
+        builder: () => MaterialApp(
+        home: MyApp(),
+      ),
     ),
   ));
 }
